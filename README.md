@@ -32,8 +32,7 @@ _Use this document as a template to fill in as you progress through the challeng
 
 # Title
 
-_*Investigating forest cover change across protected areas.*_
-
+Mapping forest cover between 2000 and 2014 in the Kruger National Park, South Africa
 
 # Authors
 
