@@ -40,8 +40,7 @@ _*Izzy, Elspseth, Amy, Joseph, Caitlin, Ron.*_
 
 
 # Research question
-__How much forest cover loss and gain has occurred in your protected area?__
-
+How much has forest cover changed over 14 years in the Kruger national park 
 
 # Introduction
 
