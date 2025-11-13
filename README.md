@@ -38,7 +38,7 @@ _*Add here.*_
 
 # Authors
 
-_*Add here.*_
+_*Izzy, Elspseth, Amy, Joseph, Caitlin, Cameron.*_
 
 
 # Research question
