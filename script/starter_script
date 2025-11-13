@@ -1,0 +1,112 @@
+/***************************************
+ * HACKATHON CHALLENGE: FOREST CHANGE IN PROTECTED AREAS
+ * 
+ * Goal: Calculate net forest change (gain - loss)
+ * for one or more protected areas between 2000–2016.
+ * 
+ * Protected Area: Kruger National Park
+ *
+ * You’ll need to fill in some missing pieces (marked with TODO)
+ * and use the hints provided.
+ *
+ * Remember:
+ *  - You can Google Earth Engine syntax (e.g., “ee.Image pixelArea example”)
+ *  - Ask your teammates and discuss
+ *  - Use print() often to debug and check intermediate steps!
+ ***************************************/
+
+// Load datasets
+var gfc = ee.Image('UMD/hansen/global_forest_change_2024_v1_12');
+var parks = ee.FeatureCollection("WCMC/WDPA/current/polygons");
+
+// Add the focal park in red
+// Map.addLayer(parks, {color: 'bb0b0b'}, 'parks');
+
+// Select key bands
+var treeCover = gfc.select(["treecover2000"]);
+var lossImage = gfc.select(["loss"]);
+var gainImage = gfc.select(["gain"]);
+
+// Create list for 16 years of change
+var years = ee.List.sequence(1,16);
+
+// Set scale to Hansen dataset resolution (30m)
+var scale = gfc.projection().nominalScale();
+
+// Filter to park of interest
+var parks = parks.filter(ee.Filter.eq("NAME", 'Kruger National Park'));
+
+// Add park layer
+Map.addLayer(parks, {color: 'bb0b0b'}, 'parks');
+
+// Compute tree cover area (km2)
+var treeCover = gfc.select(["treecover2000"]);
+treeCover = treeCover.divide(100);
+var areaCover = treeCover.multiply(ee.Image.pixelArea())
+                .divide(1000000).select([0],["areacover"]);
+
+// Compute loss area
+var loss = gfc.select(["loss"]);
+var areaLoss = loss.gt(0).multiply(ee.Image.pixelArea()).multiply(treeCover)
+               .divide(1000000).select([0],["arealoss"]);
+
+// Compute gain area
+var gain = gfc.select(["gain"]);
+var areaGain = gain.gt(0).multiply(ee.Image.pixelArea()).multiply(treeCover)
+               .divide(1000000).select([0],["areagain"]);
+
+// Combine all layers
+var total = gfc.addBands(areaCover)
+            .addBands(areaLoss)
+            .addBands(areaGain);
+
+// Reduce to park region
+var parkSums = areaCover.reduceRegions({
+  collection: parks,
+  reducer: ee.Reducer.sum(),
+  scale: scale,
+});
+
+// Add visualization layers
+Map.addLayer(treeCover.updateMask(treeCover),
+    {palette: ['#009900', '#99ff99'], max: 100}, 'Forest Cover');
+Map.addLayer(loss.updateMask(loss),
+            {palette: ['#9900ff']}, 'Loss');
+Map.addLayer(gain.updateMask(gain),
+            {palette: ['#ffae00']}, 'Gain');
+
+// Function to calculate yearly change
+var addVar = function(feature) {
+  var addVarYear = function(year, feat) {
+    year = ee.Number(year).toInt();
+    feat = ee.Feature(feat);
+    var actual_year = ee.Number(2000).add(year);
+    var filtered = total.select("lossyear").eq(year);
+    filtered = total.updateMask(filtered);
+    var reduc = filtered.reduceRegion({
+      geometry: feature.geometry(),
+      reducer: ee.Reducer.sum(),
+      scale: scale,
+      maxPixels: 1e13
+    });
+    var loss = ee.Number(reduc.get("arealoss"));
+    var gain = ee.Number(reduc.get("areagain"));
+    var nameloss = ee.String("loss_").cat(actual_year);
+    var namegain = ee.String("gain_").cat(actual_year);
+    var cond = loss.gt(0).or(gain.gt(0));
+    return ee.Algorithms.If(cond, 
+                            feat.set(nameloss, loss, namegain, gain),
+                            feat);
+  };
+  var newfeat = ee.Feature(years.iterate(addVarYear, feature));
+  return newfeat;
+};
+
+// Map function over parks
+var forestChange = parkSums.map(addVar);
+
+// Export results
+Export.table.toDrive({
+  collection: forestChange,
+  description: 'forest_change_Kruger_National_Park'
+});
