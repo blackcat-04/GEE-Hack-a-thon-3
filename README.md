@@ -38,7 +38,7 @@ _*Investigating forest cover change across protected areas.*_
 
 # Authors
 
-_*Izzy, Elspseth, Amy, Joseph, Caitlin, Cameron.*_
+_*Izzy, Elspseth, Amy, Joseph, Caitlin, Ron.*_
 
 
 # Research question
