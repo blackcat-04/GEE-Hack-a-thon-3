@@ -44,7 +44,7 @@ How much has forest cover changed over 14 years in the Kruger national park
 
 # Introduction
 
-The Kruger National park, spanning almost 2 million hectares, is an unbeaten oasis nested in the Mpumalanga province, South Africa. Established in 1898 as a recognised protected area, it is home to 336 tree species and wide diversity of species. Mapping the change in forest cover provides invaluable insight as to how the park is responding to global change and how conservation techniques are preserving one of the most beautiful safaris in the world. 
+The Kruger National park, spanning almost 2 million hectares, is an unbeaten oasis nested in the Mpumalanga province, South Africa. Established in 1898 as a recognised protected area, it is home to 336 tree species and wide diversity of species. Vegetation offers crucial shelter and food sources for birds, mammals and invertebrates and disturbances can cause shifts in food web compositions and dynamics and possibly lead to a decline in species richness. Mapping the change in forest cover provides invaluable insight as to how the park is responding to global change and how conservation techniques are preserving one of the most beautiful safaris in the world. 
 
 # Workflow
 
@@ -52,9 +52,7 @@ _*Write out or draw your workflow in text here, on paper or in a ppt slide and t
 
 
 # Specific hypotheses and predictions
-
-_*What do you know about this protected area?  What sort of factors could influence forest cover change in this part of the world?*_
-
+We hypothesise that the forest cover has declined due to climate change, human activity and floods. 
 
 # Methods
 
