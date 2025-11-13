@@ -20,8 +20,7 @@ Link to the GEE scripts:
 - Group 7: https://code.earthengine.google.com/6262f6238b491f9ca8a1340f22fd0f31
 
 # Overarching goal
-_*Investigate forest cover change across protected areas.*_
-
+To investigate the forest cover change in the Kruger national park, South Africa between 2000 and 2014
 
 # Challenge aims
 - Map forest cover change from the Hansen et al. Database for your group's protected area as well for the larger region surrounding the protected area
