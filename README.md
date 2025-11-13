@@ -45,8 +45,7 @@ __How much forest cover loss and gain has occurred in your protected area?__
 
 # Introduction
 
-_*Introduce the reader to your park and research questions that you are testing during this challenge in 200 words or fewer. You can include a few references if you would like.*_
-
+The Kruger National park, spanning almost 2 million hectares, is an unbeaten oasis nested in the Mpumalanga province, South Africa. Established in 1898 as a recognised protected area, it is home to 336 tree species and wide diversity of species. Mapping the change in forest cover provides invaluable insight as to how the park is responding to global change and how conservation techniques are preserving one of the most beautiful safaris in the world. 
 
 # Workflow
 
