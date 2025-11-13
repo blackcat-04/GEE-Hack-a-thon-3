@@ -33,7 +33,7 @@ _Use this document as a template to fill in as you progress through the challeng
 
 # Title
 
-_*Investigate forest cover change across protected areas.*_
+_*Investigating forest cover change across protected areas.*_
 
 
 # Authors
